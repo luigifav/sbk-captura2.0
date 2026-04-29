@@ -74,13 +74,13 @@ export interface Documento {
   origem: 'caixa_entrada' | 'monitoramento';
 }
 
-const processosTeste = [
+const processosTeste: Processo[] = [
   {
     id: 'proc-teste-001',
     cnj: '0000001-01.2026.0.12.3456',
-    fonte: 'PDPJ' as const,
+    fonte: 'PDPJ',
     tipo_andamento: 'Sentença',
-    polo: 'ativo' as const,
+    polo: 'ativo',
     tribunal: 'TJ-SP',
     data_captura: subMinutes(subDays(new Date(), 1), 120),
     status_leitura: true,
@@ -108,14 +108,14 @@ export const mockProcessos: Processo[] = [
       cnj: gerarCNJ(),
       fonte,
       tipo_andamento: andamento,
-      polo: Math.random() > 0.5 ? 'ativo' : 'passivo',
+      polo: Math.random() > 0.5 ? ('ativo' as const) : ('passivo' as const),
       tribunal: tribunais[Math.floor(Math.random() * tribunais.length)],
       data_captura: datCaptura,
       status_leitura: Math.random() > 0.3,
       estado,
       hash_documento: `sha256_${Math.random().toString(36).substring(2, 66)}`,
       tamanho_documento: Math.floor(Math.random() * 5000) + 100,
-    };
+    } as Processo;
   }),
 ];
 

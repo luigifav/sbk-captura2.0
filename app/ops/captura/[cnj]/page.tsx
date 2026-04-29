@@ -21,6 +21,9 @@ export default function CaseDetailPage() {
   const params = useParams();
   const cnj = params.cnj as string;
 
+  const [actionModal, setActionModal] = useState<ActionType>(null);
+  const [reason, setReason] = useState('');
+
   const processo = mockProcessos.find(p => p.cnj === cnj);
   if (!processo) {
     return (
@@ -36,22 +39,18 @@ export default function CaseDetailPage() {
   const cliente = mockClientesRepresentados.find(c => c.id === registro?.cliente_id);
   const credencial = mockCredenciais[0];
 
-  const [actionModal, setActionModal] = useState<ActionType>(null);
-  const [reason, setReason] = useState('');
-
   const handleActionConfirm = () => {
     console.log(`Ação ${actionModal} realizada com razão: ${reason}`);
     setActionModal(null);
     setReason('');
   };
 
-  const actionLabels: Record<ActionType, string> = {
+  const actionLabels: Record<Exclude<ActionType, null>, string> = {
     capture: 'Forçar nova captura',
     reprocess: 'Reprocessar',
     block: 'Bloquear',
     priority: 'Alterar prioridade',
     deliver: 'Marcar manualmente como entregue',
-    null: '',
   };
 
   return (
@@ -99,10 +98,10 @@ export default function CaseDetailPage() {
         </div>
       </div>
 
-      {actionModal && (
+      {actionModal && actionModal !== null && (
         <ActionModal
           title={actionLabels[actionModal]}
-          isOpen={actionModal !== null}
+          isOpen={true}
           onClose={() => {
             setActionModal(null);
             setReason('');
