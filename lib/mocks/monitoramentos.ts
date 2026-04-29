@@ -7,7 +7,7 @@ export interface Monitoramento {
   id: string;
   termo: string;
   fontes_ativadas: string[];
-  frequencia: 'real-time' | 'horaria' | 'diaria';
+  frequencia: 'real-time' | 'horaria' | '4h' | 'diaria';
   total_matches_24h: number;
   total_matches_7d: number;
   status: 'ativo' | 'pausado' | 'excluido';
