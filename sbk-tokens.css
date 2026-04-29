@@ -1,0 +1,419 @@
+/* =============================================================
+   SBK Design System — Colors & Type
+   --------------------------------------------------------------
+   Source: SBK Brandbook 2026 (uploads/Brandbook SBK 2026.pdf)
+   Two-tier ecosystem:
+     • SBK     — strategic, premium, deeper tones
+     • SBK IA  — digital products, lighter variations of same palette
+   Type: Plus Jakarta Sans (SemiBold for titles, Light for body)
+   Concept: CARDS — modular, repeatable, scalable
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* =========================================================
+     PRIMARY PALETTE (Brandbook §3.1)
+     The base of the brand. Use as the spine of every layout.
+     ========================================================= */
+  --sbk-verde-escuro:  #023631;   /* PRIMARY brand colour — solidez, controle, profundidade */
+  --sbk-ciano-escuro:  #075056;   /* SECONDARY brand colour — tecnologia, dinamismo */
+  --sbk-off-white:     #ECEFF3;   /* Light surface, calm canvas */
+
+  /* =========================================================
+     SECONDARY PALETTE (Brandbook §3.2)
+     For composition, backgrounds, support elements.
+     ========================================================= */
+  --sbk-branco:          #FFFFFF;
+  --sbk-preto:           #000000;
+  --sbk-verde-profundo:  #012824;   /* SBK darker variation */
+  --sbk-ciano-profundo:  #0E4442;
+  --sbk-verde-claro:     #0A5A52;   /* SBK IA lighter variation, also a hover */
+  --sbk-ciano:           #2A7C79;   /* SBK IA accent */
+  --sbk-chumbo-leve:     #4A545E;   /* Neutral grey for body text */
+
+  /* =========================================================
+     EXTENDED RAMP — derived neutrals & tints we need for UI
+     (Tints/shades along the brand axis; not in brandbook.)
+     ========================================================= */
+  --sbk-verde-50:  #E6EEEC;
+  --sbk-verde-100: #C6D7D3;
+  --sbk-verde-200: #8FAFA9;
+  --sbk-verde-300: #4F857D;
+  --sbk-verde-400: #1F635B;
+  --sbk-verde-500: #023631;   /* = verde-escuro */
+  --sbk-verde-600: #012824;   /* = verde-profundo */
+  --sbk-verde-700: #011C1A;
+  --sbk-verde-800: #010F0E;
+
+  --sbk-ciano-50:  #E8EFF0;
+  --sbk-ciano-100: #C8D9DB;
+  --sbk-ciano-200: #92B5B8;
+  --sbk-ciano-300: #5C9094;
+  --sbk-ciano-400: #2A7C79;   /* = ciano */
+  --sbk-ciano-500: #075056;   /* = ciano-escuro */
+  --sbk-ciano-600: #0E4442;   /* = ciano-profundo */
+
+  /* Cool grey ramp anchored on Chumbo Leve */
+  --sbk-grey-50:   #F4F6F8;
+  --sbk-grey-100:  #ECEFF3;   /* = off-white */
+  --sbk-grey-200:  #DCE0E6;
+  --sbk-grey-300:  #C0C6CE;
+  --sbk-grey-400:  #8C95A0;
+  --sbk-grey-500:  #4A545E;   /* = chumbo-leve */
+  --sbk-grey-600:  #353C44;
+  --sbk-grey-700:  #232930;
+  --sbk-grey-800:  #14181C;
+  --sbk-grey-900:  #0A0D10;
+
+  /* =========================================================
+     SEMANTIC ALIASES — brand-facing tokens for UI
+     (Light theme default — flip in .sbk-dark)
+     ========================================================= */
+  --sbk-bg:        var(--sbk-off-white);   /* Page background */
+  --sbk-bg-canvas: var(--sbk-branco);      /* Inside-card / surface */
+  --sbk-bg-subtle: var(--sbk-grey-100);    /* Subtle fill */
+  --sbk-bg-muted:  var(--sbk-grey-200);
+
+  --sbk-fg-1: var(--sbk-verde-profundo);   /* Primary text — never pure black; brand-tinted */
+  --sbk-fg-2: var(--sbk-grey-600);         /* Body */
+  --sbk-fg-3: var(--sbk-grey-500);         /* Muted (chumbo-leve) */
+  --sbk-fg-4: var(--sbk-grey-400);         /* Disabled / placeholder */
+  --sbk-fg-on-dark: var(--sbk-off-white);
+  --sbk-fg-on-accent: var(--sbk-off-white);
+
+  --sbk-border:        var(--sbk-grey-200);
+  --sbk-border-strong: var(--sbk-grey-300);
+  --sbk-border-dark:   var(--sbk-grey-700);
+
+  /* SBK (parent) accent — deeper, premium */
+  --sbk-accent:        var(--sbk-verde-escuro);
+  --sbk-accent-hover:  var(--sbk-verde-profundo);
+  --sbk-accent-press:  #001A18;
+  --sbk-accent-soft:   var(--sbk-verde-50);
+
+  /* SBK IA accent — lighter, dynamic */
+  --sbk-ia-accent:        var(--sbk-ciano);
+  --sbk-ia-accent-hover:  var(--sbk-ciano-escuro);
+  --sbk-ia-accent-press:  var(--sbk-ciano-profundo);
+  --sbk-ia-accent-soft:   var(--sbk-ciano-50);
+
+  /* =========================================================
+     SEMANTIC STATUS — used sparingly
+     ========================================================= */
+  --sbk-success: var(--sbk-verde-claro);
+  --sbk-warning: #C28215;
+  --sbk-warning-bg: #FBF1DC;
+  --sbk-danger:  #B53838;
+  --sbk-danger-bg: #FBE3E3;
+  --sbk-info:    var(--sbk-ciano);
+  --sbk-info-bg: var(--sbk-ciano-50);
+
+  /* =========================================================
+     TYPOGRAPHY — Plus Jakarta Sans
+     Brandbook prescribes: Seminegrito (600) for titles,
+     Leve (300) for body.
+     ========================================================= */
+  --sbk-font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --sbk-font-body:    'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --sbk-font-mono:    'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Scale (1.250 major-third) */
+  --sbk-text-display: 4.5rem;     /* 72 — hero only */
+  --sbk-text-h1:      3rem;       /* 48 */
+  --sbk-text-h2:      2.25rem;    /* 36 */
+  --sbk-text-h3:      1.75rem;    /* 28 */
+  --sbk-text-h4:      1.375rem;   /* 22 */
+  --sbk-text-h5:      1.125rem;   /* 18 */
+  --sbk-text-lg:      1.125rem;   /* 18 — lead */
+  --sbk-text-md:      1rem;       /* 16 — body */
+  --sbk-text-sm:      0.875rem;   /* 14 */
+  --sbk-text-xs:      0.75rem;    /* 12 */
+  --sbk-text-2xs:     0.6875rem;  /* 11 — eyebrow */
+
+  --sbk-lh-tight:  1.05;
+  --sbk-lh-snug:   1.18;
+  --sbk-lh-normal: 1.5;
+  --sbk-lh-loose:  1.65;
+
+  --sbk-tracking-tight:  -0.02em;
+  --sbk-tracking-snug:   -0.01em;
+  --sbk-tracking-normal: 0;
+  --sbk-tracking-wide:   0.04em;
+  --sbk-tracking-eyebrow: 0.14em;
+
+  /* Brandbook weights: emphasises Light (300) for body, SemiBold (600) for titles */
+  --sbk-w-light:    300;
+  --sbk-w-regular:  400;
+  --sbk-w-medium:   500;
+  --sbk-w-semibold: 600;   /* titles */
+  --sbk-w-bold:     700;
+  --sbk-w-extrabold: 800;
+
+  /* =========================================================
+     SPACING — 4px base
+     ========================================================= */
+  --sbk-space-0:  0;
+  --sbk-space-1:  4px;
+  --sbk-space-2:  8px;
+  --sbk-space-3:  12px;
+  --sbk-space-4:  16px;
+  --sbk-space-5:  20px;
+  --sbk-space-6:  24px;
+  --sbk-space-8:  32px;
+  --sbk-space-10: 40px;
+  --sbk-space-12: 48px;
+  --sbk-space-16: 64px;
+  --sbk-space-20: 80px;
+  --sbk-space-24: 96px;
+  --sbk-space-32: 128px;
+
+  /* =========================================================
+     RADII — restrained. Cards are the brand motif; they should
+     read crisp and modular, not pillowy. 8–14 px is the
+     workhorse range.
+     ========================================================= */
+  --sbk-radius-xs:   4px;
+  --sbk-radius-sm:   6px;
+  --sbk-radius-md:   10px;
+  --sbk-radius-lg:   14px;
+  --sbk-radius-xl:   20px;
+  --sbk-radius-2xl:  28px;
+  --sbk-radius-full: 999px;
+
+  /* =========================================================
+     ELEVATION
+     ========================================================= */
+  --sbk-shadow-xs: 0 1px 2px rgba(2, 54, 49, 0.06);
+  --sbk-shadow-sm: 0 2px 6px rgba(2, 54, 49, 0.07), 0 1px 2px rgba(2, 54, 49, 0.04);
+  --sbk-shadow-md: 0 8px 20px rgba(2, 54, 49, 0.10), 0 2px 4px rgba(2, 54, 49, 0.05);
+  --sbk-shadow-lg: 0 18px 40px rgba(2, 54, 49, 0.14), 0 4px 8px rgba(2, 54, 49, 0.06);
+  --sbk-shadow-xl: 0 30px 60px rgba(2, 54, 49, 0.20);
+  --sbk-shadow-focus: 0 0 0 3px rgba(7, 80, 86, 0.30);
+
+  /* =========================================================
+     MOTION — calm, no bounce
+     ========================================================= */
+  --sbk-ease-standard: cubic-bezier(0.2, 0.0, 0.0, 1.0);
+  --sbk-ease-in:       cubic-bezier(0.4, 0.0, 1, 1);
+  --sbk-ease-out:      cubic-bezier(0.0, 0.0, 0.2, 1);
+  --sbk-dur-fast:   120ms;
+  --sbk-dur-base:   200ms;
+  --sbk-dur-slow:   320ms;
+
+  /* Layout */
+  --sbk-container-narrow: 720px;
+  --sbk-container:        1120px;
+  --sbk-container-wide:   1320px;
+}
+
+/* =============================================================
+   DARK SCOPE — apply on .sbk-dark
+   On dark, brand surfaces are Verde Profundo / Verde Escuro.
+   ============================================================= */
+.sbk-dark {
+  --sbk-bg:        var(--sbk-verde-profundo);
+  --sbk-bg-canvas: var(--sbk-verde-escuro);
+  --sbk-bg-subtle: #022D29;
+  --sbk-bg-muted:  var(--sbk-ciano-profundo);
+
+  --sbk-fg-1: var(--sbk-off-white);
+  --sbk-fg-2: #C8D7D4;
+  --sbk-fg-3: #8FA5A1;
+  --sbk-fg-4: #6A7E7B;
+
+  --sbk-border:        rgba(236, 239, 243, 0.12);
+  --sbk-border-strong: rgba(236, 239, 243, 0.22);
+
+  --sbk-accent:        var(--sbk-ciano);
+  --sbk-accent-hover:  #3B9290;
+  --sbk-accent-press:  var(--sbk-ciano-escuro);
+  --sbk-accent-soft:   rgba(42, 124, 121, 0.15);
+
+  color: var(--sbk-fg-1);
+  background: var(--sbk-bg);
+}
+
+/* =============================================================
+   SBK IA SCOPE — apply on .sbk-ia
+   The IA product uses lighter variations of the same palette.
+   ============================================================= */
+.sbk-ia {
+  --sbk-accent:        var(--sbk-ciano);
+  --sbk-accent-hover:  var(--sbk-ciano-escuro);
+  --sbk-accent-press:  var(--sbk-ciano-profundo);
+  --sbk-accent-soft:   var(--sbk-ciano-50);
+}
+
+/* =============================================================
+   SEMANTIC TYPE STYLES
+   Brandbook: Seminegrito (600) for titles, Leve (300) for body.
+   ============================================================= */
+.sbk-display {
+  font-family: var(--sbk-font-display);
+  font-size: var(--sbk-text-display);
+  line-height: var(--sbk-lh-tight);
+  letter-spacing: var(--sbk-tracking-tight);
+  font-weight: var(--sbk-w-semibold);
+  color: var(--sbk-fg-1);
+}
+.sbk-h1 {
+  font-family: var(--sbk-font-display);
+  font-size: var(--sbk-text-h1);
+  line-height: var(--sbk-lh-snug);
+  letter-spacing: var(--sbk-tracking-tight);
+  font-weight: var(--sbk-w-semibold);
+  color: var(--sbk-fg-1);
+}
+.sbk-h2 {
+  font-family: var(--sbk-font-display);
+  font-size: var(--sbk-text-h2);
+  line-height: var(--sbk-lh-snug);
+  letter-spacing: var(--sbk-tracking-snug);
+  font-weight: var(--sbk-w-semibold);
+  color: var(--sbk-fg-1);
+}
+.sbk-h3 {
+  font-family: var(--sbk-font-display);
+  font-size: var(--sbk-text-h3);
+  line-height: var(--sbk-lh-snug);
+  letter-spacing: var(--sbk-tracking-snug);
+  font-weight: var(--sbk-w-semibold);
+  color: var(--sbk-fg-1);
+}
+.sbk-h4 {
+  font-family: var(--sbk-font-display);
+  font-size: var(--sbk-text-h4);
+  line-height: 1.3;
+  font-weight: var(--sbk-w-semibold);
+  color: var(--sbk-fg-1);
+}
+.sbk-h5 {
+  font-family: var(--sbk-font-body);
+  font-size: var(--sbk-text-h5);
+  line-height: 1.4;
+  font-weight: var(--sbk-w-semibold);
+  color: var(--sbk-fg-1);
+}
+.sbk-eyebrow {
+  font-family: var(--sbk-font-body);
+  font-size: var(--sbk-text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--sbk-tracking-eyebrow);
+  font-weight: var(--sbk-w-semibold);
+  color: var(--sbk-accent);
+}
+.sbk-lead {
+  font-family: var(--sbk-font-body);
+  font-size: var(--sbk-text-lg);
+  line-height: var(--sbk-lh-normal);
+  color: var(--sbk-fg-2);
+  font-weight: var(--sbk-w-light);   /* Brandbook: Leve for body */
+}
+.sbk-p {
+  font-family: var(--sbk-font-body);
+  font-size: var(--sbk-text-md);
+  line-height: var(--sbk-lh-normal);
+  color: var(--sbk-fg-2);
+  font-weight: var(--sbk-w-light);   /* Brandbook: Leve for body */
+}
+.sbk-small {
+  font-family: var(--sbk-font-body);
+  font-size: var(--sbk-text-sm);
+  line-height: 1.45;
+  color: var(--sbk-fg-3);
+  font-weight: var(--sbk-w-regular);
+}
+.sbk-caption {
+  font-family: var(--sbk-font-body);
+  font-size: var(--sbk-text-xs);
+  line-height: 1.4;
+  color: var(--sbk-fg-3);
+  font-weight: var(--sbk-w-regular);
+}
+.sbk-mono {
+  font-family: var(--sbk-font-mono);
+  font-size: var(--sbk-text-sm);
+  letter-spacing: 0;
+  color: var(--sbk-fg-1);
+}
+
+/* =============================================================
+   CARD MOTIF — the central brand device
+   Per brandbook §5.2: "Os fundos da SBK são construídos a
+   partir do conceito de cards." Use these as backgrounds and
+   modular layout pieces.
+   ============================================================= */
+.sbk-card {
+  background: var(--sbk-bg-canvas);
+  border: 1px solid var(--sbk-border);
+  border-radius: var(--sbk-radius-lg);
+  box-shadow: var(--sbk-shadow-xs);
+  transition: border-color var(--sbk-dur-base) var(--sbk-ease-standard),
+              box-shadow var(--sbk-dur-base) var(--sbk-ease-standard);
+}
+.sbk-card:hover {
+  border-color: var(--sbk-border-strong);
+  box-shadow: var(--sbk-shadow-md);
+}
+.sbk-card--brand {
+  background: var(--sbk-verde-escuro);
+  color: var(--sbk-off-white);
+  border-color: transparent;
+}
+.sbk-card--ia {
+  background: var(--sbk-ciano-escuro);
+  color: var(--sbk-off-white);
+  border-color: transparent;
+}
+
+/* =============================================================
+   THE BRACKET — SBK IA's signature framing device.
+   Drawn from the logo's outer corner-brackets that hug the
+   wordmark.
+   ============================================================= */
+/* The SBK IA mark is wrapped in two large, rounded "elbows": one
+   hugs the top-left corner, the other hugs the bottom-right.
+   Strokes are thin and the corner radius is generous (~0.5em). */
+.sbk-bracketed {
+  position: relative;
+  display: inline-block;
+  padding: 0.42em 0.85em 0.42em 0.85em;
+}
+.sbk-bracketed::before,
+.sbk-bracketed::after {
+  content: "";
+  position: absolute;
+  width: 0.55em;
+  height: 0.55em;
+  border: 1.5px solid currentColor;
+}
+/* top-left elbow */
+.sbk-bracketed::before {
+  top: 0; left: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 0.5em;
+}
+/* bottom-right elbow */
+.sbk-bracketed::after {
+  bottom: 0; right: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 0.5em;
+}
+
+/* =============================================================
+   RESET / DEFAULTS — opt-in via .sbk-root
+   ============================================================= */
+.sbk-root {
+  font-family: var(--sbk-font-body);
+  color: var(--sbk-fg-1);
+  background: var(--sbk-bg);
+  font-size: var(--sbk-text-md);
+  line-height: var(--sbk-lh-normal);
+  font-weight: var(--sbk-w-light);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.sbk-root *, .sbk-root *::before, .sbk-root *::after { box-sizing: border-box; }
