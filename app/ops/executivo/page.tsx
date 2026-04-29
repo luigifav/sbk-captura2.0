@@ -39,6 +39,12 @@ export default function ExecutivoPage() {
     .sort((a, b) => b.mrr - a.mrr)
     .slice(0, 10);
 
+  const statusMap: Record<string, { label: string; color: string }> = {
+    ativo: { label: 'Saudável', color: '#10b981' },
+    inativo: { label: 'Em risco', color: '#f59e0b' },
+    suspenso: { label: 'Suspenso', color: '#ef4444' },
+  };
+
   const columns = [
     {
       accessorKey: 'nome',
@@ -48,15 +54,18 @@ export default function ExecutivoPage() {
     {
       accessorKey: 'plano',
       header: 'Plano',
-      cell: ({ row }: any) => (
-        <span className="inline-block rounded px-2 py-1 text-xs font-medium"
-          style={{
-            backgroundColor: row.original.plano === 'Enterprise' ? '#e0e7ff' : row.original.plano === 'API' ? '#dcfce7' : '#f3e8ff',
-            color: row.original.plano === 'Enterprise' ? '#4f46e5' : row.original.plano === 'API' ? '#16a34a' : '#a855f7',
-          }}>
-          {row.original.plano}
-        </span>
-      ),
+      cell: ({ row }: any) => {
+        const plano = row.original.plano as string;
+        return (
+          <span className="inline-block rounded px-2 py-1 text-xs font-medium"
+            style={{
+              backgroundColor: plano === 'Enterprise' ? '#e0e7ff' : plano === 'API' ? '#dcfce7' : '#f3e8ff',
+              color: plano === 'Enterprise' ? '#4f46e5' : plano === 'API' ? '#16a34a' : '#a855f7',
+            }}>
+            {plano}
+          </span>
+        );
+      },
     },
     {
       accessorKey: 'volume_capturado_24h',
@@ -84,12 +93,8 @@ export default function ExecutivoPage() {
       accessorKey: 'status',
       header: 'Status Saúde',
       cell: ({ row }: any) => {
-        const statusMap = {
-          ativo: { label: 'Saudável', color: '#10b981' },
-          inativo: { label: 'Em risco', color: '#f59e0b' },
-          suspenso: { label: 'Suspenso', color: '#ef4444' },
-        };
-        const s = statusMap[row.original.status];
+        const status = row.original.status as string;
+        const s = statusMap[status] || statusMap['ativo'];
         return (
           <span style={{ color: s.color }} className="font-medium">
             {s.label}
@@ -164,7 +169,7 @@ export default function ExecutivoPage() {
                 <XAxis dataKey="mes" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip
-                  formatter={(value) => `R$ ${value.toLocaleString('pt-BR')}`}
+                  formatter={(value: any) => `R$ ${(value as number).toLocaleString('pt-BR')}`}
                   contentStyle={{ backgroundColor: '#fff', border: '1px solid #ddd' }}
                 />
                 <Legend />
@@ -209,7 +214,7 @@ export default function ExecutivoPage() {
                 <XAxis dataKey="fonte" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip
-                  formatter={(value) => value.toLocaleString('pt-BR')}
+                  formatter={(value: any) => (value as number).toLocaleString('pt-BR')}
                   contentStyle={{ backgroundColor: '#fff', border: '1px solid #ddd' }}
                 />
                 <Bar dataKey="volume" fill="#4f46e5" radius={[8, 8, 0, 0]} />
