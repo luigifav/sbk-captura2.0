@@ -21,6 +21,7 @@ const config: Config = {
         sans: ["var(--font-inter)", ...fontFamily.sans],
       },
       colors: {
+        // shadcn/ui CSS-variable tokens (mantidos para compatibilidade)
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -54,11 +55,49 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+
+        // Paleta de marca
+        brand: {
+          DEFAULT: "#023631",
+          hover: "#075056",
+          light: "#0a7a82",
+          subtle: "#e6f0ef",
+          foreground: "#ffffff",
+        },
+
+        // Estados semânticos
+        success: {
+          DEFAULT: "#16a34a",
+          light: "#dcfce7",
+          muted: "#f0fdf4",
+          foreground: "#14532d",
+        },
+        warning: {
+          DEFAULT: "#d97706",
+          light: "#fef3c7",
+          muted: "#fffbeb",
+          foreground: "#78350f",
+        },
+        danger: {
+          DEFAULT: "#dc2626",
+          light: "#fee2e2",
+          muted: "#fef2f2",
+          foreground: "#7f1d1d",
+        },
+        info: {
+          DEFAULT: "#2563eb",
+          light: "#dbeafe",
+          muted: "#eff6ff",
+          foreground: "#1e3a8a",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontSize: {
+        "2xs": ["0.625rem", { lineHeight: "0.875rem" }],
       },
       keyframes: {
         "accordion-down": {
