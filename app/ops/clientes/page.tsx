@@ -283,9 +283,24 @@ export default function ClientesPage() {
   const router = useRouter();
   const [data] = useState<Cliente[]>(MOCK_CLIENTES);
 
-  const handleRowClick = (clientId: string) => {
-    router.push(`/app/ops/clientes/${clientId}`);
-  };
+  const enhancedColumns: ColumnDef<Cliente>[] = columns.map((col) => {
+    if (col.id !== 'nome') return col;
+
+    return {
+      ...col,
+      cell: (context) => (
+        <button
+          onClick={() => router.push(`/app/ops/clientes/${context.row.original.id}`)}
+          className="block w-full text-left hover:underline focus:outline-none"
+        >
+          <div>
+            <div className="font-medium">{context.row.original.nome}</div>
+            <div className="text-xs text-neutral-500">{context.row.original.cnpj}</div>
+          </div>
+        </button>
+      ),
+    };
+  });
 
   return (
     <div className="space-y-6">
@@ -296,31 +311,15 @@ export default function ClientesPage() {
         </p>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-neutral-200">
-        <div onClick={(e) => {
-          const row = (e.target as HTMLElement).closest('tr[data-client-id]');
-          if (row) {
-            const clientId = row.getAttribute('data-client-id');
-            if (clientId) handleRowClick(clientId);
-          }
-        }}>
-          <DataTable
-            columns={columns}
-            data={data}
-            searchKey="nome"
-            searchPlaceholder="Buscar por nome ou CNPJ..."
-            filterGroups={filterGroups}
-            emptyMessage="Nenhum cliente encontrado."
-            className="[&_tbody_tr]:cursor-pointer"
-          />
-        </div>
-      </div>
-
-      <style jsx>{`
-        :global([data-client-id]:hover) {
-          background-color: rgb(249 250 251);
-        }
-      `}</style>
+      <DataTable
+        columns={enhancedColumns}
+        data={data}
+        searchKey="nome"
+        searchPlaceholder="Buscar por nome ou CNPJ..."
+        filterGroups={filterGroups}
+        emptyMessage="Nenhum cliente encontrado."
+        className="[&_tbody_tr]:cursor-pointer [&_tbody_tr]:hover:bg-neutral-50"
+      />
     </div>
   );
 }
