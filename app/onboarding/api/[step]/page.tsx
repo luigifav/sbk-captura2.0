@@ -41,7 +41,7 @@ export default function ApiOnboardingStep() {
   const currentStepIndex = API_STEPS.indexOf(params.step);
 
   useEffect(() => {
-    const savedData = getOnboardingData('api');
+    const savedData = getOnboardingData('api') as any;
     setFormData(savedData);
 
     if (params.step === 'api-key' && !savedData.apiKey) {

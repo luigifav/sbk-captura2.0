@@ -42,7 +42,7 @@ export function validateCNPJ(cnpj: string): boolean {
   let pos = size - 7;
 
   for (let i = size; i >= 1; i--) {
-    sum += numbers.charAt(size - i) * pos--;
+    sum += parseInt(numbers.charAt(size - i)) * pos--;
     if (pos < 2) pos = 9;
   }
 
@@ -58,7 +58,7 @@ export function validateCNPJ(cnpj: string): boolean {
   pos = size - 7;
 
   for (let i = size; i >= 1; i--) {
-    sum += numbers.charAt(size - i) * pos--;
+    sum += parseInt(numbers.charAt(size - i)) * pos--;
     if (pos < 2) pos = 9;
   }
 

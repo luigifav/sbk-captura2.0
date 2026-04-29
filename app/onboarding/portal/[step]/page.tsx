@@ -49,7 +49,7 @@ export default function PortalOnboardingStep() {
   const currentStepIndex = PORTAL_STEPS.indexOf(params.step);
 
   useEffect(() => {
-    const savedData = getOnboardingData('portal');
+    const savedData = getOnboardingData('portal') as any;
     setFormData(savedData);
   }, []);
 
@@ -373,7 +373,7 @@ export default function PortalOnboardingStep() {
               <Input
                 label="Número do cartão"
                 placeholder="0000 0000 0000 0000"
-                maxLength="19"
+                maxLength={19}
                 value={formData.cardNumber || ''}
                 onChange={(e) => {
                   let value = e.target.value.replace(/\D/g, '').slice(0, 16);
@@ -393,7 +393,7 @@ export default function PortalOnboardingStep() {
                 <Input
                   label="Validade"
                   placeholder="MM/AA"
-                  maxLength="5"
+                  maxLength={5}
                   value={formData.cardExpiry || ''}
                   onChange={(e) => {
                     let value = e.target.value.replace(/\D/g, '').slice(0, 4);
@@ -407,7 +407,7 @@ export default function PortalOnboardingStep() {
                 <Input
                   label="CVC"
                   placeholder="000"
-                  maxLength="3"
+                  maxLength={3}
                   type="password"
                   value={formData.cardCvc || ''}
                   onChange={(e) =>
