@@ -1,7 +1,7 @@
 // Seção: 9.2 - Portal de Operações
 // 25 clientes para gestão interna com planos, volume capturado, taxa de sucesso e MRR
 
-import { subDays, subHours } from 'date-fns';
+import { subDays, subHours, subMonths, format } from 'date-fns';
 
 export interface TaxaSucesso {
   PDPJ: number;
@@ -19,6 +19,34 @@ export interface ClienteOps {
   mrr: number;
   status: 'ativo' | 'inativo' | 'suspenso';
   ultima_atividade: Date;
+}
+
+export interface MRRHistorico {
+  mes: string;
+  Portal: number;
+  API: number;
+  Enterprise: number;
+}
+
+export interface VolumesPorFonte {
+  fonte: string;
+  volume: number;
+}
+
+export interface Anomalia {
+  tipo: 'inativo' | 'queda-volume' | 'spike-erro';
+  cliente: string;
+  descricao: string;
+  timestamp: Date;
+  severidade: 'baixa' | 'media' | 'alta';
+}
+
+export interface KR {
+  nome: string;
+  baseline: number;
+  alvoMVP: number;
+  atual: number;
+  unidade: string;
 }
 
 const nomes = [
@@ -75,3 +103,83 @@ export const mockClientesOps: ClienteOps[] = nomes.map((nome, i) => {
     ultima_atividade: subHours(new Date(), Math.floor(Math.random() * 168)),
   };
 });
+
+export const mockMRRHistorico: MRRHistorico[] = Array.from({ length: 12 }).map((_, i) => {
+  const mes = format(subMonths(new Date(), 11 - i), 'MMM yyyy');
+  return {
+    mes,
+    Portal: Math.floor(Math.random() * 15000) + 5000,
+    API: Math.floor(Math.random() * 35000) + 15000,
+    Enterprise: Math.floor(Math.random() * 50000) + 25000,
+  };
+});
+
+export const mockVolumesPorFonte: VolumesPorFonte[] = [
+  { fonte: 'PDPJ', volume: Math.floor(Math.random() * 5000) + 3000 },
+  { fonte: 'DJE', volume: Math.floor(Math.random() * 4000) + 2000 },
+  { fonte: 'TJ', volume: Math.floor(Math.random() * 3000) + 1500 },
+  { fonte: 'PJe', volume: Math.floor(Math.random() * 2000) + 800 },
+  { fonte: 'DataJud', volume: Math.floor(Math.random() * 1500) + 500 },
+];
+
+export const mockAnomalias: Anomalia[] = [
+  {
+    tipo: 'inativo',
+    cliente: 'Análise Jurídica Premium',
+    descricao: 'Cliente sem atividade há 7 dias',
+    timestamp: subDays(new Date(), 2),
+    severidade: 'media',
+  },
+  {
+    tipo: 'queda-volume',
+    cliente: 'Justiça Digital LTDA',
+    descricao: 'Queda de 60% no volume comparado ao mês anterior',
+    timestamp: subDays(new Date(), 1),
+    severidade: 'alta',
+  },
+  {
+    tipo: 'spike-erro',
+    cliente: 'Consultoria Jurídica Nacional',
+    descricao: 'Taxa de erro aumentou para 15% em captura PDPJ',
+    timestamp: new Date(),
+    severidade: 'alta',
+  },
+  {
+    tipo: 'inativo',
+    cliente: 'Portal Jurídico Integrado',
+    descricao: 'Cliente inativo há mais de 30 dias',
+    timestamp: subDays(new Date(), 5),
+    severidade: 'baixa',
+  },
+];
+
+export const mockKRs: KR[] = [
+  {
+    nome: 'Tempo cadastro para primeiro consumo',
+    baseline: 240,
+    alvoMVP: 120,
+    atual: 95,
+    unidade: 'minutos',
+  },
+  {
+    nome: 'SLA captura (p95)',
+    baseline: 3600,
+    alvoMVP: 1800,
+    atual: 1450,
+    unidade: 'segundos',
+  },
+  {
+    nome: 'SLA entrega (p95)',
+    baseline: 7200,
+    alvoMVP: 3600,
+    atual: 2800,
+    unidade: 'segundos',
+  },
+  {
+    nome: 'Cobertura PDPJ',
+    baseline: 75,
+    alvoMVP: 95,
+    atual: 88,
+    unidade: '%',
+  },
+];
