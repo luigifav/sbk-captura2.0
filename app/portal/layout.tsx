@@ -21,13 +21,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
-  { icon: Inbox, label: 'Caixa de Entrada', href: '/portal/inbox', badge: 5 },
-  { icon: BarChart3, label: 'Monitoramento', href: '/portal/monitoring' },
-  { icon: FileText, label: 'Documentos', href: '/portal/documents' },
-  { icon: AlertCircle, label: 'Alertas', href: '/portal/alerts' },
-  { icon: Code2, label: 'API & Consumo', href: '/portal/api' },
-  { icon: Lock, label: 'Credenciais PDPJ', href: '/portal/credentials' },
-  { icon: Settings, label: 'Conta & Plano', href: '/portal/account' },
+  { icon: Inbox, label: 'Caixa de Entrada', href: '/portal/caixa-entrada', badge: 5 },
+  { icon: BarChart3, label: 'Monitoramento', href: '/portal/monitoramento' },
+  { icon: FileText, label: 'Documentos', href: '/portal/documentos' },
+  { icon: AlertCircle, label: 'Alertas', href: '/portal/alertas' },
+  { icon: Code2, label: 'API e Consumo', href: '/portal/api-consumo' },
+  { icon: Lock, label: 'Credenciais PDPJ', href: '/portal/credenciais' },
+  { icon: Settings, label: 'Conta e Plano', href: '/portal/conta' },
 ];
 
 export default function PortalLayout({

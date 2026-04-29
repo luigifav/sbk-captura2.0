@@ -24,13 +24,11 @@ import { mockClientesOps } from '@/lib/mocks/clientes-ops';
 
 const navItems = [
   { icon: BarChart3, label: 'Dashboard Operacional', href: '/ops/dashboard' },
-  { icon: AlertTriangle, label: 'Dashboard Executivo', href: '/ops/executive' },
-  { icon: Users, label: 'Clientes', href: '/ops/clients' },
-  { icon: Zap, label: 'Captura (CNJ)', href: '/ops/capture' },
-  { icon: Clock, label: 'Retry & Timeout', href: '/ops/retry' },
-  { icon: FileText, label: 'Registro de Captura', href: '/ops/records' },
-  { icon: AlertCircle, label: 'Auditoria', href: '/ops/audit' },
-  { icon: Settings, label: 'Configurações', href: '/ops/settings' },
+  { icon: AlertTriangle, label: 'Dashboard Executivo', href: '/ops/executivo' },
+  { icon: Users, label: 'Clientes', href: '/ops/clientes' },
+  { icon: Zap, label: 'Captura (CNJ)', href: '/ops/captura' },
+  { icon: Clock, label: 'Retry e Timeout', href: '/ops/retry-timeout' },
+  { icon: FileText, label: 'Registro de Captura', href: '/ops/registro' },
 ];
 
 export default function OpsLayout({
