@@ -109,7 +109,7 @@ export default function PortalOnboardingStep() {
     setTimeout(() => {
       const nextIndex = currentStepIndex + 1;
       if (nextIndex < PORTAL_STEPS.length) {
-        router.push(`/app/onboarding/portal/${PORTAL_STEPS[nextIndex]}`);
+        router.push(`/onboarding/portal/${PORTAL_STEPS[nextIndex]}`);
       }
       setIsLoading(false);
     }, 500);
@@ -117,7 +117,7 @@ export default function PortalOnboardingStep() {
 
   const handleBack = () => {
     if (currentStepIndex > 0) {
-      router.push(`/app/onboarding/portal/${PORTAL_STEPS[currentStepIndex - 1]}`);
+      router.push(`/onboarding/portal/${PORTAL_STEPS[currentStepIndex - 1]}`);
     }
   };
 

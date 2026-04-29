@@ -9,11 +9,11 @@ export default function OnboardingSelectFlow() {
   const router = useRouter();
 
   const handlePortalClick = () => {
-    router.push('/app/onboarding/portal/cadastro');
+    router.push('/onboarding/portal/cadastro');
   };
 
   const handleApiClick = () => {
-    router.push('/app/onboarding/api/cadastro');
+    router.push('/onboarding/api/cadastro');
   };
 
   return (

@@ -77,7 +77,7 @@ export default function ApiOnboardingStep() {
     setTimeout(() => {
       const nextIndex = currentStepIndex + 1;
       if (nextIndex < API_STEPS.length) {
-        router.push(`/app/onboarding/api/${API_STEPS[nextIndex]}`);
+        router.push(`/onboarding/api/${API_STEPS[nextIndex]}`);
       }
       setIsLoading(false);
     }, 500);
@@ -85,7 +85,7 @@ export default function ApiOnboardingStep() {
 
   const handleBack = () => {
     if (currentStepIndex > 0) {
-      router.push(`/app/onboarding/api/${API_STEPS[currentStepIndex - 1]}`);
+      router.push(`/onboarding/api/${API_STEPS[currentStepIndex - 1]}`);
     }
   };
 
