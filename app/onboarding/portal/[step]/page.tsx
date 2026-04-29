@@ -47,14 +47,15 @@ export default function PortalOnboardingStep() {
   const [isLoading, setIsLoading] = useState(false);
 
   const currentStepIndex = PORTAL_STEPS.indexOf(params.step);
-  if (currentStepIndex === -1) {
-    return <div>Passo inválido</div>;
-  }
 
   useEffect(() => {
     const savedData = getOnboardingData('portal');
     setFormData(savedData);
   }, []);
+
+  if (currentStepIndex === -1) {
+    return <div>Passo inválido</div>;
+  }
 
   const validateStep = (step: string, data: any): boolean => {
     const newErrors: any = {};

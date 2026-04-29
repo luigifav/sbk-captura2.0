@@ -39,9 +39,6 @@ export default function ApiOnboardingStep() {
   const [isLoading, setIsLoading] = useState(false);
 
   const currentStepIndex = API_STEPS.indexOf(params.step);
-  if (currentStepIndex === -1) {
-    return <div>Passo inválido</div>;
-  }
 
   useEffect(() => {
     const savedData = getOnboardingData('api');
@@ -49,10 +46,14 @@ export default function ApiOnboardingStep() {
 
     if (params.step === 'api-key' && !savedData.apiKey) {
       const newApiKey = generateApiKey();
-      setFormData({ ...savedData, apiKey: newApiKey });
+      setFormData((prev: any) => ({ ...prev, apiKey: newApiKey }));
       saveOnboardingData('api', { ...savedData, apiKey: newApiKey });
     }
   }, [params.step]);
+
+  if (currentStepIndex === -1) {
+    return <div>Passo inválido</div>;
+  }
 
   const validateStep = (step: string, data: any): boolean => {
     const newErrors: any = {};
