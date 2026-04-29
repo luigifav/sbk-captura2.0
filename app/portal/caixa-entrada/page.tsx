@@ -31,14 +31,14 @@ export default function CaixaEntradaPage() {
   const [filterFonte, setFilterFonte] = useState<FilterType>('all');
   const [copiedHash, setCopiedHash] = useState<string | null>(null);
 
-  const statusLeitura = useMemo(
+  const statusLeitura = useMemo<Record<string, boolean>>(
     () =>
       mockProcessos.reduce(
         (acc, proc) => ({
           ...acc,
           [proc.id]: leitura[proc.id] ?? proc.status_leitura,
         }),
-        {}
+        {} as Record<string, boolean>
       ),
     [leitura]
   );
