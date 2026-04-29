@@ -420,7 +420,7 @@ function AddCredencialModal({ onClose }: { onClose: () => void }) {
                         3. Vá em Integrações &gt; Tokens de Acesso
                       </p>
                       <p>
-                        4. Clique em "Novo Token" e selecione "PDPJ"
+                        4. Clique em &quot;Novo Token&quot; e selecione &quot;PDPJ&quot;
                       </p>
                       <p>
                         5. Copie o token gerado
