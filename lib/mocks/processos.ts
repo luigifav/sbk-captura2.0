@@ -61,6 +61,19 @@ export interface Processo {
   tamanho_documento: number;
 }
 
+export interface Documento {
+  id: string;
+  cnj: string;
+  tipo_documento: string;
+  fonte: 'PDPJ' | 'DJE' | 'TJ' | 'Monitoramento';
+  tribunal: string;
+  data_captura: Date;
+  tamanho: number;
+  hash_truncado: string;
+  status: 'processado' | 'processando' | 'erro';
+  origem: 'caixa_entrada' | 'monitoramento';
+}
+
 export const mockProcessos: Processo[] = Array.from({ length: 80 }, (_, i) => {
   const fonte = selecionarPorProbabilidade(fontes, [0.6, 0.25, 0.15]);
   const andamento = selecionarPorProbabilidade(andamentos, [0.15, 0.15, 0.15, 0.15, 0.2, 0.1, 0.1, 0.0]);
@@ -84,5 +97,46 @@ export const mockProcessos: Processo[] = Array.from({ length: 80 }, (_, i) => {
     estado,
     hash_documento: `sha256_${Math.random().toString(36).substring(2, 66)}`,
     tamanho_documento: Math.floor(Math.random() * 5000) + 100,
+  };
+});
+
+const tiposDocumento = [
+  'Citação',
+  'Sentença',
+  'Despacho',
+  'Intimação',
+  'Decisão',
+  'Agravo',
+  'Petição',
+  'Parecer',
+];
+
+export const mockDocumentos: Documento[] = Array.from({ length: 120 }, (_, i) => {
+  const fonte = selecionarPorProbabilidade(
+    ['PDPJ', 'DJE', 'TJ', 'Monitoramento'] as const,
+    [0.35, 0.25, 0.2, 0.2]
+  );
+  const tipo = tiposDocumento[Math.floor(Math.random() * tiposDocumento.length)];
+  const origem = Math.random() > 0.4 ? 'caixa_entrada' : 'monitoramento';
+  const status = selecionarPorProbabilidade(
+    ['processado', 'processando', 'erro'] as const,
+    [0.85, 0.1, 0.05]
+  );
+
+  const diasAtras = Math.floor(Math.random() * 60);
+  const datCaptura = subMinutes(subDays(new Date(), diasAtras), Math.floor(Math.random() * 1440));
+  const hash = `sha256_${Math.random().toString(36).substring(2, 66)}`;
+
+  return {
+    id: `doc-${String(i + 1).padStart(6, '0')}`,
+    cnj: gerarCNJ(),
+    tipo_documento: tipo,
+    fonte,
+    tribunal: tribunais[Math.floor(Math.random() * tribunais.length)],
+    data_captura: datCaptura,
+    tamanho: Math.floor(Math.random() * 10000) + 100,
+    hash_truncado: hash.substring(0, 8),
+    status,
+    origem,
   };
 });
