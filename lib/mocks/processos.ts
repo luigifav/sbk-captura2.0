@@ -74,31 +74,50 @@ export interface Documento {
   origem: 'caixa_entrada' | 'monitoramento';
 }
 
-export const mockProcessos: Processo[] = Array.from({ length: 80 }, (_, i) => {
-  const fonte = selecionarPorProbabilidade(fontes, [0.6, 0.25, 0.15]);
-  const andamento = selecionarPorProbabilidade(andamentos, [0.15, 0.15, 0.15, 0.15, 0.2, 0.1, 0.1, 0.0]);
-  const estado = selecionarPorProbabilidade(
-    estatos,
-    [0.05, 0.1, 0.15, 0.65, 0.03, 0.02]
-  );
+const processosTeste: Processo[] = [
+  {
+    id: 'proc-teste-001',
+    cnj: '0000001-01.2026.0.12.3456',
+    fonte: 'PDPJ',
+    tipo_andamento: 'Sentença',
+    polo: 'ativo',
+    tribunal: 'TJ-SP',
+    data_captura: subMinutes(subDays(new Date(), 1), 120),
+    status_leitura: true,
+    estado: 'Entregue',
+    hash_documento: 'sha256_abc123def456abc123def456abc123def456abc123def456abc123def456ab',
+    tamanho_documento: 2345,
+  },
+];
 
-  const diasAtras = Math.floor(Math.random() * 30);
-  const datCaptura = subMinutes(subDays(new Date(), diasAtras), Math.floor(Math.random() * 1440));
+export const mockProcessos: Processo[] = [
+  ...processosTeste,
+  ...Array.from({ length: 80 }, (_, i) => {
+    const fonte = selecionarPorProbabilidade(fontes, [0.6, 0.25, 0.15]);
+    const andamento = selecionarPorProbabilidade(andamentos, [0.15, 0.15, 0.15, 0.15, 0.2, 0.1, 0.1, 0.0]);
+    const estado = selecionarPorProbabilidade(
+      estatos,
+      [0.05, 0.1, 0.15, 0.65, 0.03, 0.02]
+    );
 
-  return {
-    id: `proc-${String(i + 1).padStart(5, '0')}`,
-    cnj: gerarCNJ(),
-    fonte,
-    tipo_andamento: andamento,
-    polo: Math.random() > 0.5 ? 'ativo' : 'passivo',
-    tribunal: tribunais[Math.floor(Math.random() * tribunais.length)],
-    data_captura: datCaptura,
-    status_leitura: Math.random() > 0.3,
-    estado,
-    hash_documento: `sha256_${Math.random().toString(36).substring(2, 66)}`,
-    tamanho_documento: Math.floor(Math.random() * 5000) + 100,
-  };
-});
+    const diasAtras = Math.floor(Math.random() * 30);
+    const datCaptura = subMinutes(subDays(new Date(), diasAtras), Math.floor(Math.random() * 1440));
+
+    return {
+      id: `proc-${String(i + 1).padStart(5, '0')}`,
+      cnj: gerarCNJ(),
+      fonte,
+      tipo_andamento: andamento,
+      polo: Math.random() > 0.5 ? ('ativo' as const) : ('passivo' as const),
+      tribunal: tribunais[Math.floor(Math.random() * tribunais.length)],
+      data_captura: datCaptura,
+      status_leitura: Math.random() > 0.3,
+      estado,
+      hash_documento: `sha256_${Math.random().toString(36).substring(2, 66)}`,
+      tamanho_documento: Math.floor(Math.random() * 5000) + 100,
+    } as Processo;
+  }),
+];
 
 const tiposDocumento = [
   'Citação',
