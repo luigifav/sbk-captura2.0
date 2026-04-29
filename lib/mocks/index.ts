@@ -8,7 +8,7 @@ export { mockMonitoramentos, type Monitoramento } from './monitoramentos';
 export { mockCredenciais, type Credencial } from './credenciais';
 export { mockClientesOps, type ClienteOps, type TaxaSucesso } from './clientes-ops';
 export { mockEventosCaptura, type EventoCaptura, type TipoEvento } from './eventos-captura';
-export { mockRetryProcessos, type RetryProcesso } from './retry';
+export { mockRetryProcessosPush, mockRetryProcessosPull, mockAlertRegras, type RetryProcessoPush, type RetryProcessoPull, type AlertRegra } from './retry';
 export { mockRegistrosCapturadosEntregas, type RegistroCapturado } from './registro-captura-entrega';
 
 // Exports para compatibilidade com código anterior
